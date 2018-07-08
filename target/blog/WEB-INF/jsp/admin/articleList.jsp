@@ -6,7 +6,7 @@
     <%@include file="../common/include.jsp" %>
     <script type="text/javascript" src="${rc.contextPath}/js/admin/articleList.js"></script>
     <style>
-        html body{margin-top: 0px;}
+        html body{ margin-top: 15px; margin-bottom: 10px}
     </style>
 </head>
 <body>
@@ -32,7 +32,7 @@
         </div>
         <table id="articleList" lay-filter=""></table>
         <script type="text/html" id="isStickTpl">
-            <input type="checkbox" name="isStick" value="{{d.id}}" title="置顶" lay-filter="stickDemo" {{ d.isStick == 1? 'checked' : '' }}>
+            <input type="checkbox" name="isStick" value="{{d.id}}" title="置顶" lay-filter="stickDemo" {{ d.isStick == 1 ? 'checked' : '' }}>
         </script>
         <script type="text/html" id="allowCommentTpl">
             <input type="checkbox" name="allowComment" value="{{d.id}}" title="允许" lay-filter="commentDemo" {{ d.allowComment == 0 ? 'checked' : '' }}>

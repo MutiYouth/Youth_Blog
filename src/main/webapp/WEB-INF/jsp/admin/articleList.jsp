@@ -6,7 +6,7 @@
     <%@include file="../common/include.jsp" %>
     <script type="text/javascript" src="${rc.contextPath}/js/admin/articleList.js"></script>
     <style>
-        html body{margin-top: 0px;}
+        html body{ margin-top: 15px; margin-bottom: 10px}
     </style>
 </head>
 <body>
