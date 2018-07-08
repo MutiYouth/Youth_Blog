@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.linn.home.dao.LetterDao">
+    <resultMap id="letterResultMap" type="com.linn.home.entity.Letter">
+        <id property="id" column="id" />
+        <result property="userName" column="user_name"/>
+        <result property="contactWay" column="contact_way"/>
+        <result property="content" column="content"/>
+        <result property="viewStatus" column="view_status"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <!--查找未查看的站内信数量-->
+    <select id="findCountByStatus" parameterType="int" resultType="int">
+        SELECT COUNT(1) FROM blog_letter WHERE view_status = #{value}
+    </select>
+
+    <!--更新站内信查看状态-->
+    <update id="updateStatusById">
+        UPDATE blog_letter
+        SET view_status  = #{viewStatus}
+        WHERE id = #{id}
+    </update>
+
+    <!--查看所有站内信-->
+    <select id="findLetterList" resultMap="letterResultMap">
+        SELECT id,user_name,content,contact_way,view_status,gmt_create,gmt_modified
+        FROM blog_letter
+        ORDER BY view_status ASC,id DESC
+    </select>
+
+    <!--查看所有站内信-->
+    <select id="findLetterById" parameterType="int" resultMap="letterResultMap">
+        SELECT id,user_name,content,contact_way,view_status,gmt_create,gmt_modified
+        FROM blog_letter
+        WHERE id = #{letterId}
+    </select>
+
+    <!--添加站内信-->
+    <insert id="addLetter"  keyProperty="id">
+        INSERT INTO blog_letter (user_name, contact_way,content)
+        VALUES (#{userName}, #{contactWay},#{content})
+    </insert>
+
+    <!--删除站内信-->
+    <delete id="deleteLetterById">
+        DELETE FROM blog_letter WHERE id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- shiro的主过滤器,beanId 和web.xml中配置的filter name需要保持一致 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 安全管理器 -->
+        <property name="securityManager" ref="securityManager" />
+        <!-- 默认的登陆访问url -->
+        <property name="loginUrl" value="/login" />
+        <!-- 没有权限跳转的url -->
+        <property name="unauthorizedUrl" value="/unauth" />
+        <!-- 访问地址的过滤规则,从上至下的优先级,如果有匹配的规则,就会返回,不会再进行匹配 -->
+        <property name="filterChainDefinitions">
+            <value>
+                /js/** = anon
+                /css/**" = anon
+                /resources/** = anon
+                /plugins/** = anon
+                /upload/** = anon
+                /error = anon
+                /admin/logout= anon
+                /admin/** = authc
+            </value>
+        </property>
+    </bean>
+
+    <!--创建securityManager对象-->
+    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+        <property name="realm" ref="realm" />
+        <property name="rememberMeManager" ref="cookieRememberMeManager" />
+    </bean>
+
+    <!--创建自定义realm-->
+    <bean class="com.linn.frame.shiro.realm.CustomRealm" id="realm">
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+    </bean>
+
+    <!--密码加密-->
+    <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="credentialsMatcher">
+        <property name="hashAlgorithmName" value="md5" />
+        <property name="hashIterations" value="1" />
+    </bean>
+
+    <!--记住我功能-->
+    <bean class="org.apache.shiro.web.mgt.CookieRememberMeManager" id="cookieRememberMeManager">
+        <property name="cookie" ref="cookie" />
+    </bean>
+
+    <!--自动登录-->
+    <bean class="org.apache.shiro.web.servlet.SimpleCookie" id="cookie">
+        <constructor-arg value="rememberMe" />
+        <property name="maxAge" value="3600" />
+    </bean>
+
+</beans>

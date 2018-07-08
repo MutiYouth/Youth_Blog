@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.linn.home.dao.UserDao">
+    <resultMap id="userResultMap" type="com.linn.home.entity.User">
+        <id property="id" column="id" />
+        <result property="nickname" column="nickname"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="city" column="city"/>
+        <result property="avatar" column="avatar"/>
+        <result property="signMsg" column="sign_msg"/>
+        <result property="userName" column="user_name"/>
+        <result property="passWord" column="pass_word"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <!--修改用户个人信息-->
+    <update id="updateUserByUserName">
+        UPDATE blog_user
+        SET nickname=#{nickname},email=#{email},sex=#{sex},city=#{city},sign_msg=#{signMsg},gmt_modified = #{gmtModified}
+        WHERE user_name = #{userName}
+    </update>
+
+    <!--修改密码-->
+    <update id="updatePasswordByUsername">
+        UPDATE blog_user
+        SET pass_word=#{passWord},gmt_modified = #{gmtModified}
+        WHERE user_name = #{userName}
+    </update>
+
+    <!--验证用户是否存在-->
+    <select id="findUserByNameAndPass" parameterType="com.linn.home.entity.User" resultType="int">
+        SELECT count(1)
+        FROM blog_user
+        WHERE user_name = #{userName}
+        AND pass_word = #{passWord}
+    </select>
+
+    <!--通过用户名查找用户-->
+    <select id="findUserByName" parameterType="String" resultMap="userResultMap">
+        SELECT id,nickname,user_name,pass_word,sex,email,city,avatar,sign_msg,gmt_create,gmt_modified
+        FROM blog_user
+        WHERE 1=1
+        AND user_name = #{value}
+    </select>
+
+    <!--根据用户名查找拥有的所有角色 shiro-realm需要使用-->
+    <select id="getRolesByUserId" parameterType="Integer" resultType="String">
+        SELECT r.code
+        FROM blog_role r
+        JOIN blog_user_role ur
+        ON r.id = ur.user_id
+        AND ur.user_id = #{userId}
+    </select>
+
+    <!--根据用户名查找密码 shiro-realm需要使用-->
+    <select id="getPasswordByUsername" resultMap="userResultMap">
+        SELECT pass_word
+        FROM blog_user t
+        WHERE t.user_name = #{userName}
+    </select>
+
+    <!--根据角色名查找拥有的所有权限 shiro-realm需要使用-->
+    <select id="getPermisisonByUserId" parameterType="Integer" resultType="String">
+        SELECT p.code
+        FROM blog_user_role ur
+        JOIN blog_role_permission rp ON rp.role_id = ur.role_id
+        JOIN blog_permission p ON  p.id = rp.permission_id
+        WHERE ur.user_id = #{userId}
+    </select>
+
+    <!--修改用户头像地址-->
+    <update id="updateUserAvatar">
+        UPDATE blog_user
+        SET avatar=#{avatar}
+        WHERE user_name = #{userName}
+    </update>
+
+</mapper>

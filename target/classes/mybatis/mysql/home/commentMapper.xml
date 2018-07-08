@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.linn.home.dao.CommentDao">
+    <resultMap id="commentResultMap" type="com.linn.home.entity.Comment">
+        <id property="id" column="id" />
+        <result property="pid" column="pid"/>
+        <result property="rootid" column="rootid"/>
+        <result property="memberName" column="member_name"/>
+        <result property="contactInfo" column="contact_info"/>
+        <result property="content" column="content"/>
+        <result property="pdate" column="pdate"/>
+        <result property="isleaf" column="isleaf"/>
+        <result property="articleId" column="article_id"/>
+    </resultMap>
+
+    <!--通过文章id查找文章下的所有评论-->
+    <select id="findCommentListByArticleId" parameterType="int" resultMap="commentResultMap">
+        SELECT id,pid,rootid,member_name,contact_info,content,pdate,isleaf,article_id
+        FROM blog_comment
+        WHERE pid = 0
+        AND article_id = #{articleId}
+        ORDER BY id DESC
+    </select>
+
+    <!--查找父id下的所有评论-->
+    <select id="findCommentListByPid" parameterType="int" resultMap="commentResultMap">
+        SELECT id,pid,rootid,member_name,contact_info,content,pdate,isleaf,article_id
+        FROM blog_comment
+        WHERE pid = #{pid}
+        ORDER BY id DESC
+    </select>
+
+    <!--添加评论-->
+    <insert id="addComment" parameterType="com.linn.home.entity.Comment"  keyProperty="id">
+        INSERT INTO blog_comment (pid, member_name,content,isleaf,article_id,contact_info)
+        VALUES (#{pid}, #{memberName},#{content},#{isleaf},#{articleId},#{contactInfo})
+    </insert>
+
+    <!--更新评论叶子节点状态-->
+    <update id="updateCommentById" parameterType="com.linn.home.entity.Comment">
+        UPDATE blog_comment
+        SET isleaf  = #{isleaf}
+        WHERE id = #{id}
+    </update>
+</mapper>

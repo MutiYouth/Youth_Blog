@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>A Simple Page with CKEditor</title>
+        <!-- Make sure the path to CKEditor is correct. -->
+        <script src="../ckeditor.js"></script>
+		 
+    </meta></head>
+    <body>
+        <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                <h1>This is my textarea to be replaced with CKEditor.</h1>
+            </textarea>
+			<input type="button" value="获取数据" onclick="getData()">
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+				function getData(){
+					var data = CKEDITOR.instances.editor1.getData();
+					alert(data);
+				}
+            </script>
+        </form>
+    </body>
+</html>

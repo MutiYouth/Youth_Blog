@@ -1,0 +1,8 @@
+/*未访问时的状态*/
+a:link {color: #01AAED}
+/*已访问过的状态*/
+a:visited {color: #01AAED;}
+/*鼠标移动到链接上时的状态*/
+a:hover {color: #5FB878;}
+/*鼠标按下去时的状态*/
+a:active {color: #5FB878}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.linn.home.dao.ArticleDao">
+    <resultMap id="articleResultMap" type="com.linn.home.entity.Article">
+        <id property="id" column="id" />
+        <result property="categoryId" column="category_id"/>
+        <result property="title" column="title"/>
+        <result property="author" column="author"/>
+        <result property="label" column="label"/>
+        <result property="content" column="content"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="sortNo" column="sort_no"/>
+        <result property="allowComment" column="allow_comment"/>
+        <result property="isStick" column="is_stick"/>
+        <result property="isDraft" column="is_draft"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="commentCount" column="commentCount"/>
+    </resultMap>
+
+    <resultMap id="archivesResultMap" type="com.linn.home.entity.Archive">
+        <result property="date" column="pubtime"/>
+        <result property="count" column="cnt"/>
+    </resultMap>
+
+    <resultMap id="articleUserMap" type="com.linn.home.entity.Article" extends="articleResultMap">
+        <association property="user" column="author" select="com.linn.home.dao.UserDao.findUserByName"/>
+    </resultMap>
+
+    <!--后台文章管理列表-->
+    <select id="findArticleListAdmin" parameterType="com.linn.home.entity.Article" resultMap="articleResultMap">
+        SELECT id,title,author,label,is_stick,allow_comment,is_draft,gmt_create,gmt_modified FROM blog_article ORDER BY id DESC
+    </select>
+
+    <!--首页文章列表-->
+    <select id="selectArticleList" parameterType="com.linn.frame.entity.ParamDto"  resultMap="articleUserMap">
+        SELECT a.id,a.is_stick,a.author,a.title,a.gmt_create,a.label,
+        (SELECT count(1)
+             FROM blog_comment c
+             WHERE a.id = c.article_id)
+            AS commentCount
+        FROM blog_article a
+        <where>
+            <if test="categoryId != null and categoryId != ''">
+                AND a.category_id = #{categoryId}
+            </if>
+            <if test="firstDay != null and firstDay != ''">
+                AND a.gmt_create &gt; #{firstDay}
+            </if>
+            <if test="lastDay != null and lastDay != ''">
+                AND a.gmt_create &lt; #{lastDay}
+            </if>
+            <if test="searchContent != null and searchContent != ''">
+                AND a.title LIKE CONCAT('%',trim(#{searchContent}),'%')
+                OR a.author LIKE  CONCAT('%',trim(#{searchContent}),'%')
+            </if>
+        </where>
+        ORDER BY a.is_stick DESC,a.id DESC
+    </select>
+
+    <!--根据id查找文章详情-->
+    <select id="selectArticleById"  parameterType="int" resultMap="articleResultMap">
+        SELECT a.id,a.title,a.label,a.gmt_create,a.gmt_modified,a.author,a.content,a.allow_comment,a.is_stick,a.category_id,
+         (SELECT count(1)
+             FROM blog_comment c
+             WHERE a.id = c.article_id)
+            AS commentCount
+        FROM blog_article a WHERE a.id = #{articleId};
+    </select>
+
+    <!--按照每月归档日期-->
+    <select id="selectAllArchive" parameterType="com.linn.home.entity.Article" resultMap="archivesResultMap">
+        SELECT DATE_FORMAT(`gmt_create`,'%Y%m') AS pubtime, COUNT(1) AS cnt FROM blog_article GROUP BY pubtime DESC
+    </select>
+
+    <!--添加文章-->
+    <insert id="addArticle" parameterType="com.linn.home.entity.Article"  keyProperty="id">
+        INSERT INTO blog_article (category_id, title,label, author,allow_comment,is_stick, is_draft,content)
+        VALUES (#{categoryId}, #{title},#{label}, #{author}, #{allowComment},#{isStick}, #{isDraft},#{content})
+    </insert>
+
+    <!--更新文章-->
+    <insert id="updateArticle" parameterType="com.linn.home.entity.Article" keyProperty="id">
+        UPDATE blog_article
+        SET category_id  = #{categoryId}, title = #{title},label = #{label},author = #{author},is_stick = #{isStick},
+        is_draft=#{isDraft},allow_comment=#{allowComment},content=#{content}
+        WHERE id = #{id}
+    </insert>
+
+    <!--删除文章-->
+    <delete id="deleteArticleById" parameterType="com.linn.home.entity.Article">
+        DELETE FROM blog_article WHERE id = #{id}
+    </delete>
+
+    <!--更改文章置顶状态-->
+    <update id="updateArticleStick" parameterType="com.linn.home.entity.Article">
+        UPDATE blog_article
+        SET is_stick = #{isStick}
+        WHERE id = #{id}
+    </update>
+
+    <!--更改文章置顶状态-->
+    <update id="updateAllowComment" parameterType="com.linn.home.entity.Article">
+        UPDATE blog_article
+        SET allow_comment = #{allowComment}
+        WHERE id = #{id}
+    </update>
+</mapper>

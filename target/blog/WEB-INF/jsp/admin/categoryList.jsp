@@ -1,0 +1,36 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<html>
+<head>
+    <title>分类列表</title>
+    <%@include file="../common/include.jsp" %>
+    <script type="text/javascript" src="${rc.contextPath}/js/admin/categoryList.js"></script>
+    <style>
+        html body{margin-top: 0px;}
+    </style>
+</head>
+<body>
+<div class="layui-card">
+    <div class="layui-card-header" style="background-color: #c2c2c2">分类列表</div>
+    <div class="layui-card-body">
+        <div class="layui-btn-group demoTable">
+            <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="addCategory">
+                <i class="layui-icon" title="添加">&#xe654;</i>
+            </button>
+            <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="changeCategory">
+                <i class="layui-icon" title="修改">&#xe642;</i>
+            </button>
+            <shiro:hasRole name="admin">
+                <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="delCategory">
+                    <i class="layui-icon" title="删除">&#xe640;</i>
+                </button>
+            </shiro:hasRole>
+            <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="reload">
+                <i class="layui-icon" title="刷新">&#xe666;</i>
+            </button>
+        </div>
+        <table id="categoryList" lay-filter=""></table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.linn.home.dao.NoticeDao">
+    <resultMap id="noticeResultMap" type="com.linn.home.entity.Notice">
+        <id property="id" column="id" />
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="author" column="author"/>
+        <result property="isActive" column="is_active"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <!--查找一条随机的已激活的通知-->
+    <select id="findActiveNotice" resultMap="noticeResultMap">
+        SELECT id,title,author,content FROM blog_notice WHERE is_active = 1 ORDER BY RAND() DESC LIMIT 0,1
+    </select>
+
+    <!--查询所有通知列表-->
+    <select id="findNoticeList" resultMap="noticeResultMap">
+        SELECT id,title,content,author,is_active,gmt_create,gmt_modified FROM blog_notice ORDER BY id DESC
+    </select>
+
+    <!--根据id查找通知-->
+    <select id="findNoticeById" parameterType="int"  resultMap="noticeResultMap">
+        SELECT id,title,content,author,is_active FROM blog_notice WHERE id = #{noticeId}
+    </select>
+
+    <!--添加一个通知-->
+    <insert id="addNotice"  keyProperty="id">
+        INSERT INTO blog_notice (title, content,author,is_active)
+        VALUES (#{title}, #{content},#{author},#{isActive})
+    </insert>
+
+    <!--通过id更新通过-->
+    <update id="updateNoticeById">
+        UPDATE blog_notice
+        SET title  = #{title}, content = #{content},author = #{author},is_active = #{isActive}, gmt_modified = #{gmtModified}
+        WHERE id = #{id}
+    </update>
+
+    <!--通过id更新通过-->
+    <update id="updateNotcieIsActive" parameterType="com.linn.home.entity.Notice">
+        UPDATE blog_notice
+        SET is_active  = #{isActive}
+        WHERE id = #{id}
+    </update>
+
+    <!--根据id删除通知-->
+    <delete id="deleteNoticeById">
+        DELETE FROM blog_notice WHERE id = #{id}
+    </delete>
+</mapper>

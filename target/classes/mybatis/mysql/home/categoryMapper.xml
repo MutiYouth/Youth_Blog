@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.linn.home.dao.CategoryDao">
+    <resultMap id="categoryResultMap" type="com.linn.home.entity.Category">
+        <id property="id" column="id" />
+        <result property="title" column="title"/>
+        <result property="intro" column="intro"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="articleCount" column="articleCount"/>
+    </resultMap>
+
+    <!--查询所有的文章类别-->
+    <select id="selectAllCategory" parameterType="com.linn.home.entity.Category" resultMap="categoryResultMap">
+        SELECT id,title,intro,gmt_create,gmt_modified,
+            (SELECT count(1)
+             FROM blog_article a
+             WHERE a.category_id = c.id)
+            AS articleCount
+        FROM blog_category c ORDER BY id DESC
+    </select>
+
+    <!--根据id查找类别详情-->
+    <select id="findCategoryById"  parameterType="int" resultMap="categoryResultMap">
+        SELECT c.id,c.intro,c.title,c.gmt_create,c.gmt_modified
+        FROM blog_category c
+        WHERE c.id = #{categoryId};
+    </select>
+
+    <!--添加一个类别-->
+    <insert id="addCategory" parameterType="com.linn.home.entity.Category" keyProperty="id">
+        INSERT INTO blog_category (title, intro)
+        VALUES (#{title}, #{intro})
+    </insert>
+
+    <!--根据id更新类别-->
+    <update id="updateCategoryById" parameterType="com.linn.home.entity.Category">
+        UPDATE blog_category
+        SET title  = #{title}, intro = #{intro},gmt_modified = #{gmtModified}
+        WHERE id = #{id}
+    </update>
+
+    <!--根据id删除类别-->
+    <delete id="deleteCategoryById" parameterType="com.linn.home.entity.Category">
+        DELETE FROM blog_category WHERE id = #{id}
+    </delete>
+</mapper>

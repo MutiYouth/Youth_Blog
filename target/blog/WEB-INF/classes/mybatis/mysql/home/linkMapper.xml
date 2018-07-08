@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.linn.home.dao.LinkDao">
+    <resultMap id="linkResultMap" type="com.linn.home.entity.Link">
+        <id property="id" column="id" />
+        <result property="title" column="title"/>
+        <result property="url" column="url"/>
+        <result property="remark" column="remark"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <!--查找友链列表-->
+    <select id="findLinkList" resultMap="linkResultMap">
+        SELECT id,title,url,remark,gmt_create,gmt_modified FROM blog_link ORDER BY id DESC
+    </select>
+
+
+    <select id="findLinkById"  parameterType="int" resultMap="linkResultMap">
+        SELECT id,title,url,remark,gmt_create,gmt_modified FROM blog_link WHERE id = #{linkId}
+    </select>
+
+    <!--添加友链-->
+    <insert id="addLink"  keyProperty="id">
+        INSERT INTO blog_link (title, url,remark)
+        VALUES (#{title}, #{url},#{remark})
+    </insert>
+
+    <!--更新友链-->
+    <update id="updateLinkById">
+        UPDATE blog_link
+        SET title  = #{title}, url = #{url},remark = #{remark},gmt_modified = #{gmtModified}
+        WHERE id = #{id}
+    </update>
+
+    <!--删除友链-->
+    <delete id="deleteLinkById">
+        DELETE FROM blog_link WHERE id = #{id}
+    </delete>
+</mapper>
