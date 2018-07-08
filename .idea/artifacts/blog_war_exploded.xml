@@ -4,7 +4,7 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="blog" />
+          <element id="module-output" name="youth_blog" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.apache.shiro:shiro-core:1.2.4" />
@@ -44,7 +44,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/blog/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="blog/web/Web" />
+      <element id="javaee-facet-resources" facet="youth_blog/web/Web" />
     </root>
   </artifact>
 </component>
