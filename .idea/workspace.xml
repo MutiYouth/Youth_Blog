@@ -196,7 +196,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15448852" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -344,7 +344,7 @@
       <workItem from="1530932508319" duration="5608000" />
       <workItem from="1530942911819" duration="16094000" />
       <workItem from="1530976651480" duration="5142000" />
-      <workItem from="1531015265963" duration="2389000" />
+      <workItem from="1531015265963" duration="5414000" />
     </task>
     <task id="LOCAL-00001" summary="first commet for easily use of java ssm">
       <created>1530981793699</created>
@@ -364,10 +364,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29233000" />
+    <option name="totallyTimeSpent" value="32258000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="550" y="79" width="1356" height="768" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="0" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
@@ -391,7 +391,7 @@
       <window_info anchor="right" x="133" y="394" width="1182" height="308" id="Run" order="9" type="FLOATING" weight="0.49726027" />
       <window_info anchor="bottom" id="Spring" order="5" weight="0.32876712" />
       <window_info anchor="bottom" id="Terminal" order="6" weight="0.32876712" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16486903" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14343163" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="2" side_tool="true" />
