@@ -11,7 +11,7 @@ layui.use(['table','layer'], function(){
         ,url: 'admin/getCategoryListDate' //数据接口
         ,page: true //开启分页
         ,cols: [[ //表头
-            {type:'checkbox'}
+             {type:'checkbox',unresize: true}
             ,{field: 'id', title: 'ID',  sort: true}
             ,{field: 'title', title: '名称'}
             ,{field: 'intro', title: '备注'}

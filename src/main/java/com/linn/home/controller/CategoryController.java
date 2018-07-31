@@ -66,6 +66,7 @@ public class CategoryController extends BaseController {
     @ResponseBody
     @RequestMapping("/admin/addOrUpdateCatg")
     public ResultBean addOrUpdateCatg(Category catg) {
+
         if (StringUtils.isEmpty(catg.getId())) {
             //添加
             catg.setGmtCreate(new Date());

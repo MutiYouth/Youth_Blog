@@ -10,7 +10,7 @@
     <style>
         html body {
             margin-top: 0px;
-            margin-bottom: 10px;
+            padding-bottom: 10px;
         }
     </style>
 </head>
@@ -21,13 +21,12 @@
             <div class="layui-card-header"></div>
 
             <form class="layui-form" action="" method="post">
-
                 <input type="hidden" id="categoryId" name="categoryId" value="${category.id}">
                 <div class="layui-form-item">
                     <label class="layui-form-label">分类名称</label>
                     <div class="layui-input-block">
-                        <input type="text" id="title" name="title" lay-verify="required" class="layui-input"
-                               value="${category.title}">
+                        <input type="text" id="title" name="title"
+                               lay-verify="required" class="layui-input" value="${category.title}">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
@@ -36,6 +35,8 @@
                         <textarea id="intro" name="intro" class="layui-textarea">${category.intro}</textarea>
                     </div>
                 </div>
+
+                <%--提交--%>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <%--<shiro:hasRole name="admin">--%>

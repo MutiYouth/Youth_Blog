@@ -6,7 +6,7 @@ layui.use(['form', 'layer'], function(){
         $.ajax({
             url: "admin/addOrUpdateCatg",
             data: {
-                id: data.field.articleId,
+                id: data.field.categoryId,
                 title:data.field.title,
                 intro:data.field.intro
             },

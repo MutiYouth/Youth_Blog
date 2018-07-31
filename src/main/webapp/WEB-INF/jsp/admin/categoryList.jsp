@@ -20,11 +20,14 @@
             <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="changeCategory">
                 <i class="layui-icon" title="修改">&#xe642;</i>
             </button>
-            <shiro:hasRole name="admin">
+            <%--<shiro:hasRole name="admin">
                 <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="delCategory">
                     <i class="layui-icon" title="删除">&#xe640;</i>
                 </button>
-            </shiro:hasRole>
+            </shiro:hasRole>--%>
+            <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="delCategory">
+                <i class="layui-icon" title="删除">&#xe640;</i>
+            </button>
             <button class="layui-btn layui-btn-primary  layui-btn-sm" data-type="reload">
                 <i class="layui-icon" title="刷新">&#xe666;</i>
             </button>
