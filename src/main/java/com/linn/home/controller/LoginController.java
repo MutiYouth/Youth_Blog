@@ -13,7 +13,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 
@@ -60,6 +62,10 @@ public class LoginController extends BaseController{
             ,@RequestParam(value = "password") String password
             ,@RequestParam(value = "rememberMe",required=false) String rememberMe
             ,Model model){
+
+        User user = userService.findUserByName("weng");
+
+
 
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);

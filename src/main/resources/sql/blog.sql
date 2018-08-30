@@ -25,7 +25,7 @@ CREATE TABLE `blog_article` (
   `category_id` int(10) NOT NULL COMMENT '文章类别id',
   `title` varchar(30) NOT NULL COMMENT '标题',
   `author` varchar(32) NOT NULL COMMENT '作者',
-  `label` varchar(10) DEFAULT NULL COMMENT '标签',
+  `label` varchar(50) DEFAULT NULL COMMENT '标签',
   `content` text NOT NULL COMMENT '正文',
   `gmt_create` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '录入时间',
   `gmt_modified` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
