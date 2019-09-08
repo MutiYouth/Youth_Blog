@@ -13,19 +13,18 @@ MySQL - 5.7.16 : Database - blog
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-# CREATE DATABASE /*!32312 IF NOT EXISTS*/`weng_blog` /*!40100 DEFAULT CHARACTER SET utf8 */;
+# CREATE DATABASE /*!32312 IF NOT EXISTS*/`weng_blog_t1` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-use weng_blog;
+use weng_blog_t1;
 
 /*Table structure for table `blog_article` */
-
 DROP TABLE IF EXISTS `blog_article`;
 CREATE TABLE `blog_article` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `category_id` int(10) NOT NULL COMMENT '文章类别id',
   `title` varchar(30) NOT NULL COMMENT '标题',
   `author` varchar(32) NOT NULL COMMENT '作者',
-  `label` varchar(10) DEFAULT NULL COMMENT '标签',
+  `label` varchar(50) DEFAULT NULL COMMENT '标签',
   `content` text NOT NULL COMMENT '正文',
   `gmt_create` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '录入时间',
   `gmt_modified` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -133,8 +132,9 @@ CREATE TABLE `blog_user` (
   UNIQUE KEY `uk_name` (`user_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-INSERT INTO weng_blog.blog_user (user_name,nickname, pass_word,email, sex,city,avatar, sign_msg, gmt_create, gmt_modified) VALUES
-  ('weng','WENG LIUS','31b92710645ada1d26b1c1f07d84a830','hurricanblue@126,com',0,'杭州','/YOUTH_BLOG2/upload/avatar/weng_avatar.jpg','加油吧，骚年！', '2018-06-14 18:03:19', '2018-06-14 18:11:56');
+# weng_blog_t1.blog_user
+INSERT INTO blog_user (user_name,nickname, pass_word,email, sex,city,avatar, sign_msg, gmt_create, gmt_modified) VALUES
+  ('weng','Murphy Liu','31b92710645ada1d26b1c1f07d84a830','xxx@126,com',0,'杭州','/YOUTH_BLOG2/upload/avatar/weng_avatar.jpg','加油吧，骚年！', '2018-06-14 18:03:19', '2018-06-14 18:11:56');
 
 
 
