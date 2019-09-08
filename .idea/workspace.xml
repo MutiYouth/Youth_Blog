@@ -7,8 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f3c6fde-349a-486c-bce2-10a545dc74af" name="Default" comment="adapt for my new pc">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -277,7 +277,7 @@
       <workItem from="1536940854542" duration="820000" />
       <workItem from="1537003352998" duration="839000" />
       <workItem from="1553097574604" duration="183000" />
-      <workItem from="1567938767287" duration="3490000" />
+      <workItem from="1567938767287" duration="3704000" />
     </task>
     <task id="LOCAL-00001" summary="first commet for easily use of java ssm">
       <created>1530981793699</created>
@@ -356,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567956285420</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="adapt for my new pc">
+      <created>1567956350706</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1567956350706</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

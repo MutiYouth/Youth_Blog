@@ -10,6 +10,6 @@
    使用jsp + [layui](http://www.layui.com)(经典模块化前端框架)
     
 ### 后端
-   示例网站：http://localhost:8072/YOUTH_BLOG2/admin/ 
+   示例网站：http://localhost:8070/YOUTH_BLOG2/admin/ 
    用户名/密码：weng/abc123456
 
