@@ -73,7 +73,7 @@
 
     <!--按照每月归档日期-->
     <select id="selectAllArchive" parameterType="com.linn.home.entity.Article" resultMap="archivesResultMap">
-        SELECT DATE_FORMAT(`gmt_create`,'%Y%m') AS pubtime, COUNT(1) AS cnt FROM blog_article GROUP BY pubtime DESC
+        SELECT DATE_FORMAT(b.gmt_create,'%Y%m') AS pubtime, COUNT(1) AS cnt FROM blog_article b GROUP BY pubtime order by pubtime desc
     </select>
 
     <!--添加文章-->
